@@ -100,7 +100,7 @@ export default function Page() {
             <div className="flex w-max space-x-4 p-4">
               {searchData.results.map(result => (
                 <a
-                  key={result.id}
+                  key={result.url}
                   href={result.url}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -129,11 +129,6 @@ export default function Page() {
                                   result.publishedDate
                                 ).toLocaleDateString()}
                               </span>
-                            </div>
-                          )}
-                          {result.score && (
-                            <div className="rounded-full bg-green-100 px-2 py-0.5 text-green-700">
-                              Score: {result.score.toFixed(2)}
                             </div>
                           )}
                         </div>

@@ -1,12 +1,9 @@
 export interface ExaSearchResult {
-  id: string
+  title: string | null
   url: string
-  title: string
-  author: string
-  publishedDate: string
-  text: string
-  score?: number
-  summary?: string
+  author: string | null
+  publishedDate: string | null
+  text: string | null
 }
 
 export interface TextContentsOptions {
@@ -15,8 +12,7 @@ export interface TextContentsOptions {
 }
 
 export interface ExaSearchOptions {
-  type?: "auto" | "semantic" | "keyword" | "hybrid"
-  limit?: number
-  offset?: number
+  type?: string
   text?: true | TextContentsOptions
+  limit?: number
 }

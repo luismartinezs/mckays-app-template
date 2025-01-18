@@ -59,7 +59,7 @@ export async function searchWithSummariesAction(
       message: "Search and summary completed successfully",
       data: {
         results: searchResult.data,
-        summary: summaryResponse.isSuccess ? summaryResponse.data.message.content : undefined
+        summary: summaryResponse.isSuccess && summaryResponse.data.message.content ? summaryResponse.data.message.content : undefined
       }
     }
   } catch (error) {
