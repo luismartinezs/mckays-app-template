@@ -8,6 +8,7 @@ import { ExaSearchResult } from "@/types"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { CalendarIcon, Loader2Icon, UserIcon } from "lucide-react"
+import ReactMarkdown from "react-markdown"
 
 interface SearchResults {
   results: ExaSearchResult[]
@@ -166,12 +167,54 @@ export default function Page() {
               </div>
             </div>
           </CardHeader>
-          <CardContent className="text-lg leading-relaxed">
-            {searchData.summary.split("\n").map((paragraph, index) => (
-              <p key={index} className="mb-4 last:mb-0">
-                {paragraph}
-              </p>
-            ))}
+          <CardContent>
+            <div className="prose prose-gray max-w-none">
+              <ReactMarkdown
+                components={{
+                  // Style headings
+                  h1: ({ children }) => (
+                    <h1 className="mb-4 text-2xl font-bold">{children}</h1>
+                  ),
+                  h2: ({ children }) => (
+                    <h2 className="mb-3 text-xl font-bold">{children}</h2>
+                  ),
+                  h3: ({ children }) => (
+                    <h3 className="mb-2 text-lg font-bold">{children}</h3>
+                  ),
+                  // Style paragraphs
+                  p: ({ children }) => (
+                    <p className="mb-4 text-lg leading-relaxed last:mb-0">
+                      {children}
+                    </p>
+                  ),
+                  // Style lists
+                  ul: ({ children }) => (
+                    <ul className="mb-4 list-disc pl-6">{children}</ul>
+                  ),
+                  ol: ({ children }) => (
+                    <ol className="mb-4 list-decimal pl-6">{children}</ol>
+                  ),
+                  // Style list items
+                  li: ({ children }) => (
+                    <li className="mb-2 text-lg">{children}</li>
+                  ),
+                  // Style blockquotes
+                  blockquote: ({ children }) => (
+                    <blockquote className="border-l-4 border-gray-200 pl-4 italic">
+                      {children}
+                    </blockquote>
+                  ),
+                  // Style code blocks
+                  code: ({ children }) => (
+                    <code className="rounded bg-gray-100 px-1 py-0.5 font-mono text-sm">
+                      {children}
+                    </code>
+                  )
+                }}
+              >
+                {searchData.summary}
+              </ReactMarkdown>
+            </div>
           </CardContent>
         </Card>
       )}
